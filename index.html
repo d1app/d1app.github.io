@@ -34,14 +34,22 @@
 <body>
   <script>
     window.onload = () => {
-      var key = location.hash.slice(1).split('/'), domain = ['my.077n.com:15143']
+      var key = location.hash.slice(1).split('/'),
+        domain = storageGet('domain', 'my.077n.com:15143').join(','),
+        update = storageGet('update')
       if (key) {
         fetchPost(`https://${domain[0]}/${key}`, (code, data) => {
           if (code === 1) {
-            var home = data.home, domain = data.domain, update = data.update
+            if (update != data.update) {
+              domain = data.domain
+              domain.sort(() => Math.random() - 0.5)
+              storageSet('domain', domain)
+              storageSet('update', data.update)
+            }
+
+            home = data.home
             if (home.length > 0) {
               home.sort(() => Math.random() - 0.5)
-              domain.sort(() => Math.random() - 0.5)
               location.href = home[0]
             }
           } else {
@@ -71,6 +79,22 @@
           console.log(err)
         }
       })
+    }
+
+    function storageGet(name, defVal = '') {
+      var val = ''
+      if (name) {
+        val = window.localStorage.getItem(name)
+        if (!val && defVal) {
+          val = defVal
+          storageSet(name, val)
+        }
+      }
+      return val
+    }
+
+    function storageSet(name, val) {
+      window.localStorage.setItem(name, val)
     }
   </script>
 </body>
