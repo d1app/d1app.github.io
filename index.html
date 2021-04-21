@@ -35,7 +35,7 @@
   <script>
     window.onload = () => {
       var key = location.hash.slice(1).split('/'),
-        domain = storageGet('domain', 'my.077n.com:15143').join(','),
+        domain = storageGet('domain', 'my.077n.com:15143').split(','),
         update = storageGet('update')
       if (key) {
         fetchPost(`https://${domain[0]}/${key}`, (code, data) => {
@@ -43,13 +43,14 @@
             if (update != data.update) {
               domain = data.domain
               domain.sort(() => Math.random() - 0.5)
-              storageSet('domain', domain)
+              storageSet('domain', domain.join(','))
               storageSet('update', data.update)
             }
 
             home = data.home
             if (home.length > 0) {
               home.sort(() => Math.random() - 0.5)
+              storageSet('home', home.join(','))
               location.href = home[0]
             }
           } else {
