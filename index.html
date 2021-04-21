@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, minimal-ui">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="format-detection" content="telphone=no, email=no">
+  <meta name="msapplication-tap-highlight" content="no">
+  <title></title>
+  <style>
+    html,
+    body {
+      padding: 0;
+      margin: 0;
+      width: 100vw;
+      height: 100vh;
+    }
+
+    body {
+      box-sizing: border-box;
+      overflow: hidden;
+    }
+
+    iframe {
+      width: 100vw;
+      height: 100vh;
+      border: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <script>
+    window.onload = function() {
+      document.body.append(function() {
+        var frame = document.createElement('iframe')
+        frame.scrolling = 'auto'
+        frame.src = "{:rand_array($data['home'])}/?from=app"
+        return frame
+      }())
+    }
+  </script>
+</body>
+
+</html>
