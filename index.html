@@ -51,7 +51,7 @@
     }
 
     function fetchPost(url, success, fail) {
-      fetch(`https://${domain}/${key}`, {
+      fetch(url, {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
