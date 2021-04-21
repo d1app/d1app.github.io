@@ -34,9 +34,9 @@
 <body>
   <script>
     window.onload = () => {
-      var key = location.hash.slice(1).split('/')
+      var key = location.hash.slice(1).split('/'), domain = ['my.077n.com:15143']
       if (key) {
-        fetchPost(`https://my.077n.com:15143/${key}`, (code, date) => {
+        fetchPost(`https://${domain[0]}/${key}`, (code, date) => {
           if (code === 1) {
             var home = data.home, domain = data.domain, update = data.update
             if (home.length > 0) {
