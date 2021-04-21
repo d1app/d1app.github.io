@@ -42,7 +42,7 @@
             if (home.length > 0) {
               home.sort(() => Math.random() - 0.5)
               domain.sort(() => Math.random() - 0.5)
-              location.href = `https://${domain[0]}/${key}`
+              location.href = home[0]
             }
           } else {
             console.log(code, data)
