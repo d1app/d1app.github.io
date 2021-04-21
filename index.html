@@ -53,7 +53,7 @@
       document.body.append(function() {
         var frame = document.createElement('iframe')
         frame.scrolling = 'auto'
-        frame.src = window.btoa($_GET['home']) + '/?from=app'
+        frame.src = window.atob($_GET['home']) + '/?from=app'
         return frame
       }())
     }
