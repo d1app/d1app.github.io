@@ -37,7 +37,10 @@
       var params = location.hash.slice(1).split('/')
       if (params.length === 2) {
         var key = params[0], domain = window.atob(decodeURIComponent(params[1]))
-        fetch(`https://${domain}/${key}`).then(response => response.json()).then(data => console.log(data))
+        fetch(`https://${domain}/${key}`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' }
+        }).then(response => response.json()).then(data => console.log(data))
       }
     }
   </script>
