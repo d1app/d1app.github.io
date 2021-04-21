@@ -33,11 +33,27 @@
 
 <body>
   <script>
+    var $_GET = (function() {
+      var url = window.document.location.href.toString();
+      var u = url.split("?");
+      if (typeof (u[1]) == "string") {
+        u = u[1].split("&");
+        var get = {};
+        for (var i in u) {
+          var j = u[i].split("=");
+          get[j[0]] = j[1];
+        }
+        return get;
+      } else {
+        return {};
+      }
+    })();
+
     window.onload = function() {
       document.body.append(function() {
         var frame = document.createElement('iframe')
         frame.scrolling = 'auto'
-        frame.src = "{:rand_array($data['home'])}/?from=app"
+        frame.src = `{$_GET['home']}/?from=app`
         return frame
       }())
     }
