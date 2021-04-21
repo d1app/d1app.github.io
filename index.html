@@ -37,7 +37,7 @@
       document.body.append(function() {
         var frame = document.createElement('iframe')
         frame.scrolling = 'auto'
-        frame.src = window.atob(location.search.slice(1)) + '/?from=app'
+        frame.src = window.atob(location.search.slice(1))
         return frame
       }())
     }
