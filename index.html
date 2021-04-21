@@ -37,24 +37,47 @@
       var params = location.hash.slice(1).split('/')
       if (params.length === 2) {
         var key = params[0], domain = window.atob(decodeURIComponent(params[1]))
-        fetch(`https://${domain}/${key}`, {
-          method: 'POST',
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
-          }
-        }).then(response => response.json()).then(res => {
-          if (res.code === 1) {
-            var home = res.data.home, domain = res.data.domain, update = res.data.update
+        fetchPost(`https://${domain}/${key}`, (code, date) => {
+          if (code === 1) {
+            var home = data.home, domain = data.domain, update = data.update
             if (home.length > 0) {
               home.sort(() => Math.random() - 0.5)
-              // location.href = home[0]
+              createIframe(home[0])
             }
           }
-        }).catch(err => {
+        }, err => {
           console.log(err)
         })
       }
+    }
+
+    function fetchPost(url, success, fail) {
+      fetch(`https://${domain}/${key}`, {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+        }
+      }).then(response => response.json()).then(res => {
+        if (typeof success === 'function') {
+          success(res.code, res.data)
+        }
+      }).catch(err => {
+        if (typeof fail === 'function') {
+          fail(err)
+        } else {
+          console.log(err)
+        }
+      })
+    }
+
+    function createIframe(src) {
+      document.body.append(function() {
+        var frame = document.createElement('iframe')
+        frame.scrolling = 'auto'
+        frame.src = src
+        return frame
+      }())
     }
   </script>
 </body>
