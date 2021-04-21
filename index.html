@@ -37,12 +37,7 @@
       var params = location.hash.slice(1).split('/')
       if (params.length === 2) {
         var key = params[0], domain = window.atob(decodeURIComponent(params[1]))
-        document.body.append(function() {
-          var frame = document.createElement('iframe')
-          frame.scrolling = 'auto'
-          frame.src = `https://${domain}/${key}`
-          return frame
-        }())
+        fetch(`https://${domain}/${key}`).then(response => response.json()).then(data => console.log(data))
       }
     }
   </script>
