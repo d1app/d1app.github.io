@@ -33,27 +33,11 @@
 
 <body>
   <script>
-    var $_GET = (function() {
-      var url = window.document.location.href.toString();
-      var u = url.split("?");
-      if (typeof (u[1]) == "string") {
-        u = u[1].split("&");
-        var get = {};
-        for (var i in u) {
-          var j = u[i].split("=");
-          get[j[0]] = j[1];
-        }
-        return get;
-      } else {
-        return {};
-      }
-    })();
-
     window.onload = function() {
       document.body.append(function() {
         var frame = document.createElement('iframe')
         frame.scrolling = 'auto'
-        frame.src = window.atob(location.pathname.slice(1)) + '/?from=app'
+        frame.src = window.atob(location.hash.slice(1)) + '/?from=app'
         return frame
       }())
     }
