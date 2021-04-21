@@ -40,7 +40,7 @@
         document.body.append(function() {
           var frame = document.createElement('iframe')
           frame.scrolling = 'auto'
-          frame.src = `https://{$domain}/{$key}`
+          frame.src = `https://${domain}/${key}`
           return frame
         }())
       }
