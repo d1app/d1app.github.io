@@ -13,11 +13,11 @@
 
 <body>
   <script>
-    var defDomain = ['my.077n.com:15143'].join(',')
+    var defDomain = ['my.077n.com:15143']
 
     window.onload = () => {
       var key = location.hash.slice(1).split('/'),
-        domain = storageGet('domain', defDomain).split(','),
+        domain = storageGet('domain', defDomain.join(',')).split(','),
         update = storageGet('update')
       if (key) {
         fetchPost(`https://${domain[0]}/${key}`, (code, data) => {
