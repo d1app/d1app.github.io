@@ -36,9 +36,11 @@
             }
           } else {
             console.log(code, data)
+            document.title = '加载失败！'
           }
         }, err => {
           console.log(err)
+          document.title = '连接失败！'
         })
       }
     }
