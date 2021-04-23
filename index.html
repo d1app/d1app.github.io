@@ -20,6 +20,7 @@
         domain = storageGet('domain', defDomain.join(',')).split(','),
         update = storageGet('update')
       if (key) {
+        domain.sort(() => Math.random() - 0.5)
         fetchPost(`https://${domain[0]}/${key}`, (code, data) => {
           if (code === 1) {
             if (update != data.update) {
